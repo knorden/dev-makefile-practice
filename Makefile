@@ -25,11 +25,10 @@ CXXFLAGS	:= -I$(HDIR) -g -Wall -std=c++17
 ## BUILD DIRECTIVE:
 all: $(EXET)
 
-$(EXET): $(OBJS)
+$(EXET): $(OSRC)
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
 $(ODIR)/%.o: %.cpp
-	if [ -d $(ODIR) ]; then @echo "Dir Exists."; else mkdir $(ODIR); fi
 	$(CXX) -c $(CXXFLAGS) $^ -o $@
 
 
@@ -38,4 +37,4 @@ $(ODIR)/%.o: %.cpp
 ##########################################################################################
 .PHONY: clean
 clean:
-	rm -r $(EXET) *.o
+	rm -r $(EXET) $(OSRC)
