@@ -29,6 +29,7 @@ $(EXET): $(OSRC)
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
 $(ODIR)/%.o: %.cpp
+	if [ ! -d "$(ODIR)" ]; then mkdir "$(ODIR)"; fi
 	$(CXX) -c $(CXXFLAGS) $^ -o $@
 
 
@@ -37,4 +38,4 @@ $(ODIR)/%.o: %.cpp
 ##########################################################################################
 .PHONY: clean
 clean:
-	rm -r $(EXET) $(OSRC)
+	rm -r $(EXET) $(ODIR)
