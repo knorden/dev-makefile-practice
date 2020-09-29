@@ -1,46 +1,39 @@
 ##########################################################################################
 ## THIS IS A TEST PROJECT								##
 ##########################################################################################
-.SUFFIXES:
-.SUFFIXES: .o .h .cpp
-	
+#.SUFFIXES:
+#.SUFFIXES: .h .cpp
+
 vpath %.cpp src
 vpath %.h hdr
-vpath %.o out
 
-%.h : %.cpp
-
+#%.h : %.cpp
 ##########################################################################################
 ## BUILD TASKS										##
 ##########################################################################################
-
 HDIR		:= hdr
-SRCS		:= src
-ODIR		:= obj/
+#SRCS		:= src
+ODIR		:= obj
 
-EXE		:= a
+EXET		:= a
 OBJS		:= main.o mainhdr.o testcode.o
+OSRC		:= $(addprefix $(ODIR)/, $(OBJS))
 
-CPP		:= g++
-CPPFLAGS	:= -I$(HDIR) -c -g -Wall -std=c++17
+CXX		:= g++
+CXXFLAGS	:= -I$(HDIR) -g -Wall -std=c++17
 
 ## BUILD DIRECTIVE:
-all: $(EXE)
+all: $(EXET)
 
-## PROBLEM: Doesn't seem to work when prefixed with the output dir:
-#$(EXE): $(ODIR)/$(OBJS)
-$(EXE): $(ODIR)/$(OBJS)
-	$(CPP) -o %@ $(<D)%^
-#	$(CPP) -o %@ %^
+$(EXET): $(OBJS)
+	$(CXX) $(CXXFLAGS) $^ -o $@
 
-## This compiles the objects into the output dir just fine.
-$(ODIR)%.o: %.cpp
-	$(CPP) $(CPPFLAGS) $< -o $@
-#	$(CPP) $(CPPFLAGS) $< -o $(ODIR)/$@
+$(ODIR)/%.o: %.cpp
+	$(CXX) -c $(CXXFLAGS) $^ -o $@
 
 ##########################################################################################
 ## CLEAN TASK										##
 ##########################################################################################
 .PHONY: clean
 clean:
-	rm -r $(EXE) $(ODIR)/*.o
+	rm -r $(EXET) *.o
