@@ -27,16 +27,15 @@ CPPFLAGS	:= -I$(HDIR) -g -Wall -std=c++17
 all: $(EXE)
 
 $(EXE): $(OBJS)
-	$(CPP) $(ODIR)/$^ -o %@
+	$(CPP) -o %@ %^
 
 %.o: %.cpp
-	@mv *.o $(ODIR)/
-	$(CPP) -c $< $(CPPFLAGS) -o $@
+	$(CPP) -c $< $(CPPFLAGS) -o $(ODIR)/$@
 
 ##########################################################################################
 ## CLEAN TASK										##
 ##########################################################################################
 .PHONY: clean
 clean:
-	rm -r $(EXE) $(ODIR)/$(OBJS)
+	rm -r $(EXE) $(ODIR)/*.o
 

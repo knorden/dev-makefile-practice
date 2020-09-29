@@ -11,13 +11,13 @@ class NameTag {
 	std::string lastN;
 	public:
 	NameTag(std::string firstN="", std::string lastN="");
-	void setFirstN(std::string);
-	void setLastN(std::string);
+	void setFirstN(std::string &);
+	void setLastN(std::string &);
 	
-	std::string &getFirstN() const;
-	std::string &getLastN() const;
+	std::string getFirstN() const;
+	std::string getLastN() const;
 
-	void operator=(const std::string &);
+	void operator=(const NameTag &);
 };
 
 #endif

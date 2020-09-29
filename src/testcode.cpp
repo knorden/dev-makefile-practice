@@ -8,15 +8,15 @@ void NameTag::setLastN(std::string &last) {
 	lastN = last;
 }
 
-std::string &NameTag::getFirstN() const {
+std::string NameTag::getFirstN() const {
 	return firstN;
 }
 
-std::string &NameTag::getLastN() const {
+std::string NameTag::getLastN() const {
 	return lastN;
 }
 
-void NameTag::operator=(const std::string &another) {
-	firstN = another.firstN;
-	lastN = another.lastN;
+void NameTag::operator=(const NameTag &right) {
+	firstN = right.firstN;
+	lastN = right.lastN;
 }
