@@ -29,7 +29,9 @@ $(EXET): $(OBJS)
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
 $(ODIR)/%.o: %.cpp
+	if [ -d $(ODIR) ]; then @echo "Dir Exists."; else mkdir $(ODIR); fi
 	$(CXX) -c $(CXXFLAGS) $^ -o $@
+
 
 ##########################################################################################
 ## CLEAN TASK										##
