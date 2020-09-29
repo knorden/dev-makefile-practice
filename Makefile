@@ -2,10 +2,11 @@
 ## THIS IS A TEST PROJECT								##
 ##########################################################################################
 .SUFFIXES:
-.SUFFIXES: .h .cpp
+.SUFFIXES: .o .h .cpp
 	
 vpath %.cpp src
 vpath %.h hdr
+vpath %.o out
 
 %.h : %.cpp
 
@@ -15,26 +16,27 @@ vpath %.h hdr
 
 HDIR		:= hdr
 SRCS		:= src
-ODIR		:= out
+ODIR		:= obj/
 
 EXE		:= a
 OBJS		:= main.o mainhdr.o testcode.o
 
 CPP		:= g++
-CPPFLAGS	:= -I$(HDIR) -g -Wall -std=c++17
+CPPFLAGS	:= -I$(HDIR) -c -g -Wall -std=c++17
 
 ## BUILD DIRECTIVE:
 all: $(EXE)
 
 ## PROBLEM: Doesn't seem to work when prefixed with the output dir:
 #$(EXE): $(ODIR)/$(OBJS)
-$(EXE): $(OBJS)
-#	$(CPP) -o %@ $(+D)%^
-	$(CPP) -o %@ %^
+$(EXE): $(ODIR)/$(OBJS)
+	$(CPP) -o %@ $(<D)%^
+#	$(CPP) -o %@ %^
 
 ## This compiles the objects into the output dir just fine.
-%.o: %.cpp
-	$(CPP) -c $< $(CPPFLAGS) -o $(ODIR)/$@
+$(ODIR)%.o: %.cpp
+	$(CPP) $(CPPFLAGS) $< -o $@
+#	$(CPP) $(CPPFLAGS) $< -o $(ODIR)/$@
 
 ##########################################################################################
 ## CLEAN TASK										##
@@ -42,4 +44,3 @@ $(EXE): $(OBJS)
 .PHONY: clean
 clean:
 	rm -r $(EXE) $(ODIR)/*.o
-
