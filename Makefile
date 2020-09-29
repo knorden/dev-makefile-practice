@@ -29,7 +29,13 @@ $(EXET): $(OSRC)
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
 $(ODIR)/%.o: %.cpp
-	if [ ! -d "$(ODIR)" ]; then mkdir "$(ODIR)"; fi
+	if [ -d "$(ODIR)" ]; then \
+		if [ -L "$(ODIR)" ]; then \
+			rm "$(ODIR)" && mkdir "$(ODIR)"; \
+		fi; \
+		printf "\033c" && echo "$(ODIR) dir exists."; \
+		else mkdir "$(ODIR)"; \
+	fi
 	$(CXX) -c $(CXXFLAGS) $^ -o $@
 
 
