@@ -7,12 +7,12 @@
 
 class NameTag {
 	private:
-	std::string firstN;
-	std::string lastN;
+	std::string f;
+	std::string l;
 	public:
-	NameTag(std::string firstN="", std::string lastN="");
-	void setFirstN(std::string &);
-	void setLastN(std::string &);
+	NameTag(std::string first="", std::string last="");
+	void setFirstN(std::string );
+	void setLastN(std::string );
 	
 	std::string getFirstN() const;
 	std::string getLastN() const;

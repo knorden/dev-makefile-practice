@@ -1,22 +1,27 @@
 #include "testcode.h"
 
-void NameTag::setFirstN(std::string &first) {
-	firstN = first;
+NameTag::NameTag(std::string first, std::string last) {
+	f = first;
+	l = last;
 }
 
-void NameTag::setLastN(std::string &last) {
-	lastN = last;
+void NameTag::setFirstN(std::string first) {
+	f = first;
+}
+
+void NameTag::setLastN(std::string last) {
+	l = last;
 }
 
 std::string NameTag::getFirstN() const {
-	return firstN;
+	return f;
 }
 
 std::string NameTag::getLastN() const {
-	return lastN;
+	return l;
 }
 
 void NameTag::operator=(const NameTag &right) {
-	firstN = right.firstN;
-	lastN = right.lastN;
+	f = right.f;
+	l = right.l;
 }
