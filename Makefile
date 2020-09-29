@@ -26,9 +26,13 @@ CPPFLAGS	:= -I$(HDIR) -g -Wall -std=c++17
 ## BUILD DIRECTIVE:
 all: $(EXE)
 
+## PROBLEM: Doesn't seem to work when prefixed with the output dir:
+#$(EXE): $(ODIR)/$(OBJS)
 $(EXE): $(OBJS)
+#	$(CPP) -o %@ $(+D)%^
 	$(CPP) -o %@ %^
 
+## This compiles the objects into the output dir just fine.
 %.o: %.cpp
 	$(CPP) -c $< $(CPPFLAGS) -o $(ODIR)/$@
 
